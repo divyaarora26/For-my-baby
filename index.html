@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Cherry ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  background: radial-gradient(circle at top, #3b0a1e, #120008);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  overflow: hidden;
+  font-family: Georgia, serif;
+}
+
+.scene {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.scene.active {
+  display: flex;
+}
+
+.hint {
+  margin-top: 20px;
+  opacity: 0.8;
+}
+
+svg {
+  width: 220px;
+  height: 200px;
+  cursor: pointer;
+}
+
+rect {
+  fill: #d11f3a;
+  rx: 4;
+}
+
+.heartbeat {
+  animation: beat 1.4s infinite;
+}
+
+@keyframes beat {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+.split #left {
+  transform: translateX(-60px) rotate(-6deg);
+  transition: 0.8s ease;
+}
+
+.split #right {
+  transform: translateX(60px) rotate(6deg);
+  transition: 0.8s ease;
+}
+
+button {
+  padding: 12px 22px;
+  margin: 10px;
+  border-radius: 20px;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.yes { background: #ff4f8b; color: white; }
+.no { background: #444; color: white; }
+
+#letter {
+  max-width: 600px;
+  background: rgba(255,255,255,0.08);
+  padding: 30px;
+  border-radius: 16px;
+  animation: fade 1.2s ease;
+}
+
+@keyframes fade {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.flower {
+  position: absolute;
+  font-size: 24px;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  to { transform: translateY(110vh); }
+}
+</style>
+</head>
+
+<body>
+
+<div id="heartScene" class="scene active">
+  <svg id="heart" class="heartbeat" viewBox="0 0 13 12">
+    <g id="left">
+      <rect x="2" y="1" width="1" height="1"/>
+      <rect x="1" y="2" width="1" height="1"/>
+      <rect x="2" y="2" width="1" height="1"/>
+      <rect x="3" y="2" width="1" height="1"/>
+
+      <rect x="0" y="3" width="1" height="1"/>
+      <rect x="1" y="3" width="1" height="1"/>
+      <rect x="2" y="3" width="1" height="1"/>
+      <rect x="3" y="3" width="1" height="1"/>
+      <rect x="4" y="3" width="1" height="1"/>
+
+      <rect x="1" y="4" width="1" height="1"/>
+      <rect x="2" y="4" width="1" height="1"/>
+      <rect x="3" y="4" width="1" height="1"/>
+
+      <rect x="2" y="5" width="1" height="1"/>
+    </g>
+
+    <g id="right">
+      <rect x="9" y="1" width="1" height="1"/>
+      <rect x="8" y="2" width="1" height="1"/>
+      <rect x="9" y="2" width="1" height="1"/>
+      <rect x="10" y="2" width="1" height="1"/>
+
+      <rect x="7" y="3" width="1" height="1"/>
+      <rect x="8" y="3" width="1" height="1"/>
+      <rect x="9" y="3" width="1" height="1"/>
+      <rect x="10" y="3" width="1" height="1"/>
+      <rect x="11" y="3" width="1" height="1"/>
+
+      <rect x="8" y="4" width="1" height="1"/>
+      <rect x="9" y="4" width="1" height="1"/>
+      <rect x="10" y="4" width="1" height="1"/>
+
+      <rect x="9" y="5" width="1" height="1"/>
+    </g>
+  </svg>
+  <div class="hint">Click the heart ❤️</div>
+</div>
+
+<div id="questionScene" class="scene">
+  <h1>Will you be my Valentine? 💘</h1>
+  <button class="yes" id="yesBtn">Yes baby 💖</button>
+  <button class="no" id="noBtn">No 😢</button>
+</div>
+
+<div id="pleadScene" class="scene">
+  <h1>Please say yes baby 🥹</h1>
+  <button class="yes" id="pleadYes">Okay… yes 💕</button>
+</div>
+
+<div id="letterScene" class="scene">
+  <div id="letter"></div>
+</div>
+
+<script>
+const heart = document.getElementById("heart");
+const scenes = ["heartScene","questionScene","pleadScene","letterScene"];
+
+function show(id){
+  scenes.forEach(s => document.getElementById(s).classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+}
+
+heart.onclick = () => {
+  heart.classList.add("split");
+  setTimeout(()=>show("questionScene"),900);
+};
+
+yesBtn.onclick = showLetter;
+pleadYes.onclick = showLetter;
+noBtn.onclick = ()=>show("pleadScene");
+
+const lines = [
+  "Dear Cherry 🍒",
+  "I love you so much more than i could ever fully explain and being with you is one of the greatest gifts in my life.",
+  "You mean everything to me.",
+  "You are incredibly beautiful and absolutely gorgeous inside and out.",
+  "Love your smile, your eyes and the whole you baby.",
+  "Lucky to call you mine.",
+  "I love you, always and forever ♾️",
+  "Your Daddy"
+];
+
+function showLetter(){
+  show("letterScene");
+  const box = document.getElementById("letter");
+  box.innerHTML = "";
+  lines.forEach((l,i)=>{
+    setTimeout(()=>{
+      const p=document.createElement("p");
+      p.textContent=l;
+      box.appendChild(p);
+    },i*700);
+  });
+  flowers();
+}
+
+function flowers(){
+  setInterval(()=>{
+    const f=document.createElement("div");
+    f.className="flower";
+    f.textContent="🌸";
+    f.style.left=Math.random()*100+"vw";
+    f.style.animationDuration=4+Math.random()*3+"s";
+    document.body.appendChild(f);
+    setTimeout(()=>f.remove(),7000);
+  },250);
+}
+</script>
+
+</body>
+</html>
