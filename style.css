@@ -1,0 +1,96 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Georgia', serif;
+}
+
+body {
+  margin: 0;
+  background: radial-gradient(circle at top, #3b0a1e, #120008);
+  color: #fff;
+  overflow: hidden;
+}
+
+.scene {
+  position: absolute;
+  inset: 0;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.scene.active {
+  display: flex;
+}
+
+.heart rect {
+  fill: #d11f3a;
+  rx: 4;
+}
+
+.heartbeat {
+  animation: beat 1.4s infinite;
+  cursor: pointer;
+}
+
+@keyframes beat {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+.split #leftHalf {
+  transform: translateX(-70px) rotate(-6deg);
+  transition: transform 0.9s ease;
+}
+
+.split #rightHalf {
+  transform: translateX(70px) rotate(6deg);
+  transition: transform 0.9s ease;
+}
+
+.hint {
+  margin-top: 20px;
+  opacity: 0.8;
+}
+
+.buttons button, #pleadYes {
+  margin: 10px;
+  padding: 12px 22px;
+  border: none;
+  border-radius: 20px;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+#yesBtn, #pleadYes {
+  background: #ff4f8b;
+  color: #fff;
+}
+
+#noBtn {
+  background: #444;
+  color: #fff;
+}
+
+#letterBox {
+  max-width: 600px;
+  padding: 30px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 16px;
+  line-height: 1.6;
+  animation: fadeIn 1.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+
+.flower, .mini-heart {
+  position: absolute;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  to { transform: translateY(110vh); }
+}
